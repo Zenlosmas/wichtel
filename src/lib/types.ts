@@ -1,6 +1,9 @@
 export type Participant = {
   name: string;
+  /** Diese Person hat ihren Namen schon gezogen. */
   revealed: boolean;
+  /** Dieser Name ist schon vergeben – jemand hat ihn als Geschenk gezogen. */
+  taken: boolean;
 };
 
 export type RoundState = {

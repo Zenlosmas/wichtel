@@ -143,6 +143,22 @@ describe('LocalStore.draw', () => {
     expect(after?.participants.find((p) => p.name === 'Papa')?.revealed).toBe(true);
     expect(after?.participants.find((p) => p.name === 'Anna')?.revealed).toBe(false);
   });
+
+  it('markiert den gezogenen Namen als vergeben, ohne ihn zu verraten', async () => {
+    const { store, roundId } = await makeRound(['Anna', 'Papa', 'Mama', 'Jonas']);
+
+    const result = await store.draw(roundId, 'Anna', SECRET_A);
+    if (result.status !== 'ok') throw new Error('Zug fehlgeschlagen');
+
+    const state = await store.roundState(roundId);
+    const drawnName = state?.participants.find((p) => p.name === result.assignment);
+
+    expect(drawnName?.taken).toBe(true);
+    expect(state?.participants.filter((p) => p.taken)).toHaveLength(1);
+    expect(state?.participants.find((p) => p.name === 'Anna')?.taken).toBe(false);
+    // Wer gezogen hat, bleibt trotzdem geheim.
+    expect(JSON.stringify(state)).not.toContain('assignment');
+  });
 });
 
 describe('LocalStore.reset', () => {

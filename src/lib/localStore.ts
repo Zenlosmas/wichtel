@@ -38,6 +38,14 @@ function emptyDb(): Database {
 }
 
 function toState(round: StoredRound): RoundState {
+  // „Vergeben" heißt: dieser Name wurde schon gezogen. Bewusst nur als Flag –
+  // wer ihn gezogen hat, bleibt im Zustand verborgen.
+  const taken = new Set(
+    round.participants
+      .filter((p) => p.revealedAt !== null)
+      .map((p) => lower(p.assignment)),
+  );
+
   return {
     id: round.id,
     title: round.title,
@@ -46,6 +54,7 @@ function toState(round: StoredRound): RoundState {
     participants: round.participants.map((p) => ({
       name: p.name,
       revealed: p.revealedAt !== null,
+      taken: taken.has(lower(p.name)),
     })),
   };
 }

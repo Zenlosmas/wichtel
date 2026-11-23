@@ -194,6 +194,7 @@ export function GuestRoundPage() {
 
   const total = state.participants.length;
   const drawn = state.participants.filter((p) => p.revealed).length;
+  const openPool = state.participants.filter((p) => !p.taken).map((p) => p.name);
   const percent = total === 0 ? 0 : Math.round((drawn / total) * 100);
   const details = [state.budget && `Budget: ${state.budget}`, state.eventDate && `Termin: ${formatDate(state.eventDate)}`]
     .filter(Boolean)
@@ -295,6 +296,23 @@ export function GuestRoundPage() {
 
       {view === 'list' && (
         <>
+          {drawn > 0 && (
+            <section className="stack">
+              <h2>Noch zu vergeben</h2>
+              {openPool.length > 0 ? (
+                <div className="chips">
+                  {openPool.map((name) => (
+                    <span key={name} className="chip">
+                      {name}
+                    </span>
+                  ))}
+                </div>
+              ) : (
+                <p className="muted">Alle Namen sind vergeben.</p>
+              )}
+            </section>
+          )}
+
           <section className="stack">
             <h2>Wer bist du?</h2>
             <ul className="name-list">

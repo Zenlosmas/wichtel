@@ -29,7 +29,7 @@ function asState(data: unknown): RoundState | null {
     participants: participants.flatMap((entry) => {
       const p = asObject(entry);
       if (!p || typeof p.name !== 'string') return [];
-      return [{ name: p.name, revealed: p.revealed === true }];
+      return [{ name: p.name, revealed: p.revealed === true, taken: p.taken === true }];
     }),
   };
 }

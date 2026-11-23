@@ -186,7 +186,16 @@ as $$
                select jsonb_agg(
                         jsonb_build_object(
                           'name', p.name,
-                          'revealed', p.revealed_at is not null
+                          'revealed', p.revealed_at is not null,
+                          -- Vergeben = dieser Name wurde schon gezogen. Wer ihn
+                          -- gezogen hat, bleibt verborgen.
+                          'taken', exists (
+                            select 1
+                              from public.wichtel_participants q
+                             where q.round_id = p.round_id
+                               and q.revealed_at is not null
+                               and lower(q.assignment_name) = lower(p.name)
+                          )
                         )
                         order by p.position
                       )
@@ -218,7 +227,16 @@ as $$
                select jsonb_agg(
                         jsonb_build_object(
                           'name', p.name,
-                          'revealed', p.revealed_at is not null
+                          'revealed', p.revealed_at is not null,
+                          -- Vergeben = dieser Name wurde schon gezogen. Wer ihn
+                          -- gezogen hat, bleibt verborgen.
+                          'taken', exists (
+                            select 1
+                              from public.wichtel_participants q
+                             where q.round_id = p.round_id
+                               and q.revealed_at is not null
+                               and lower(q.assignment_name) = lower(p.name)
+                          )
                         )
                         order by p.position
                       )
