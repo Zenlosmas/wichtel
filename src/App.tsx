@@ -5,9 +5,12 @@ import { GuestRoundPage } from './pages/GuestRoundPage';
 import { HostRoundPage } from './pages/HostRoundPage';
 
 export default function App() {
+  // BASE_URL ist "/" lokal und "/wichtel/" auf GitHub Pages.
+  const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined;
+
   return (
     <StoreProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         <Routes>
           <Route path="/" element={<CreateRoundPage />} />
           <Route path="/w/:roundId" element={<GuestRoundPage />} />
