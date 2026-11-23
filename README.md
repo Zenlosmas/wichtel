@@ -1,5 +1,8 @@
 # Wichteln
 
+**Live:** https://zenlosmas.github.io/wichtel/
+**Backend:** Supabase `ididedhgyvjlazzdnskk` (eu-central-1), Repo: https://github.com/Zenlosmas/wichtel
+
 Ein Link für die ganze Familie. Jeder öffnet ihn, tippt auf seinen Namen und
 sieht, wen er beschenkt. Sobald ein Name gezogen ist, ist er aus dem Topf.
 
@@ -56,22 +59,31 @@ den Server ausschließlich über `wichtel_draw`, und nur an das Gerät, das zieh
 
 ## Deployen
 
+Gehostet wird auf **GitHub Pages** (kein Vercel-Konto nötig):
+
 ```bash
-npm run build
-npx vercel deploy --prod
+npm run build:pages          # baut mit BASE_PATH=/wichtel/ + 404.html
+cd dist && git add -A && git commit -m "Deploy" \
+  && git push https://github.com/Zenlosmas/wichtel.git HEAD:gh-pages
 ```
 
-`vercel.json` enthält den SPA-Rewrite, damit `/w/…` und `/h/…` direkt aufrufbar
-bleiben. Danach `VITE_SUPABASE_URL` und `VITE_SUPABASE_ANON_KEY` in den
-Vercel-Projekt-Einstellungen setzen und neu deployen.
+`dist/` ist ein eigenes Git-Repo (gitignored), das nur den Build enthält.
+`404.html` ist eine Kopie von `index.html`, damit `/w/…` und `/h/…` auch beim
+Direktaufruf funktionieren.
+
+**Bekannter Schönheitsfehler:** GitHub Pages liefert für solche Direktaufrufe
+HTTP 404 (mit korrektem Inhalt). Im Browser egal, in der Konsole steht ein
+roter Eintrag. Wer das weghaben will, stellt `BrowserRouter` auf `HashRouter`
+um — dann wird der Link `…/wichtel/#/w/abc`, aber jeder Aufruf antwortet mit 200.
 
 ## Tests
 
 ```bash
-npm test
+npm test                      # 28 Unit-Tests, ohne Netz
+./scripts/smoke-backend.sh    # 13 Checks gegen das echte Supabase
 ```
 
-28 Tests: Derangement (1000 Runden, nie ein Fixpunkt, jede Zuteilung genau
+28 Unit-Tests: Derangement (1000 Runden, nie ein Fixpunkt, jede Zuteilung genau
 einmal), Namensprüfung, Zug-Semantik (erster Zug, gleiches Gerät, fremdes Gerät,
 Reset), und dass der Zustand die Zuteilung nie enthält.
 
