@@ -71,10 +71,17 @@ cd dist && git add -A && git commit -m "Deploy" \
 `404.html` ist eine Kopie von `index.html`, damit `/w/…` und `/h/…` auch beim
 Direktaufruf funktionieren.
 
-**Bekannter Schönheitsfehler:** GitHub Pages liefert für solche Direktaufrufe
-HTTP 404 (mit korrektem Inhalt). Im Browser egal, in der Konsole steht ein
-roter Eintrag. Wer das weghaben will, stellt `BrowserRouter` auf `HashRouter`
-um — dann wird der Link `…/wichtel/#/w/abc`, aber jeder Aufruf antwortet mit 200.
+**Warum Hash-Routing:** GitHub Pages beantwortet jeden Pfad ohne eigene Datei
+mit HTTP 404 — bei normalem Routing wäre jeder Runden-Link ein 404. Deshalb
+liegt die Route hinter dem `#`: `…/wichtel/#/w/abc`. Jeder Aufruf antwortet mit
+200, GitHubs 404-Seite kann nicht mehr erscheinen. Die Links baut
+`src/lib/links.ts` aus `import.meta.env.BASE_URL` — wer dort den Unterpfad
+vergisst, landet auf GitHubs 404.
+
+**Achtung beim Weitergeben:** immer den **kompletten** Link kopieren
+(`https://zenlosmas.github.io/wichtel/#/w/…`). Die reine Domain
+`zenlosmas.github.io` zeigt GitHubs „Site not found", und `/Wichtel/` mit
+großem W ist ein anderer Pfad.
 
 ## Tests
 

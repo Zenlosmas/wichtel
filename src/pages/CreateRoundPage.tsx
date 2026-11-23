@@ -4,6 +4,7 @@ import { CopyButton } from '../components/CopyButton';
 import { DemoNote } from '../components/DemoNote';
 import { MIN_NAMES, parseNames, validateNames } from '../lib/assignment';
 import { formatDate } from '../lib/format';
+import { appBase, guestLink, hostLink } from '../lib/links';
 import { useStore } from '../lib/storeContext';
 import type { CreatedRound } from '../lib/types';
 
@@ -66,8 +67,9 @@ export function CreateRoundPage() {
   }
 
   if (created) {
-    const guestUrl = `${window.location.origin}/w/${created.roundId}`;
-    const hostUrl = `${window.location.origin}/h/${created.hostToken}`;
+    const base = appBase(window.location.origin, import.meta.env.BASE_URL);
+    const guestUrl = guestLink(base, created.roundId);
+    const hostUrl = hostLink(base, created.hostToken);
     const text = whatsappText(
       title.trim() || 'Wichteln',
       guestUrl,
