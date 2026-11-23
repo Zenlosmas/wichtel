@@ -91,6 +91,18 @@ export function CreateRoundPage() {
           </p>
         </div>
 
+        {demo && (
+          <div className="warn">
+            <strong>Dieser Link funktioniert nur auf diesem Gerät.</strong>
+            <span>
+              Es ist kein Backend verbunden, die Runde liegt im Speicher dieses
+              Browsers. Auf dem Handy oder in einem anderen Browser steht
+              „Runde nicht gefunden". Für die Familie: Supabase anschließen und
+              deployen.
+            </span>
+          </div>
+        )}
+
         <section className="card stack">
           <h2>Link für die Gruppe</h2>
           <div className="link-box">

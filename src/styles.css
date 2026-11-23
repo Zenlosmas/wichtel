@@ -356,6 +356,25 @@ button {
   color: var(--accent-dark);
 }
 
+/* Demo-Modus: der Link taugt nur auf diesem Gerät. Muss man sehen, bevor
+   man ihn in die Familiengruppe schickt. */
+.warn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: #fff4e0;
+  border: 1px solid #e8c98a;
+  color: #7a4d0d;
+  border-radius: var(--radius-sm);
+  padding: 11px 13px;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.warn strong {
+  font-weight: 700;
+}
+
 .error {
   background: #fdeceb;
   border: 1px solid #f3c7c2;
