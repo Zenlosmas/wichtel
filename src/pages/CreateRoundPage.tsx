@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CopyButton } from '../components/CopyButton';
 import { DemoNote } from '../components/DemoNote';
+import { Snow } from '../components/Snow';
 import { MIN_NAMES, parseNames, validateNames } from '../lib/assignment';
 import { formatDate } from '../lib/format';
 import { appBase, guestLink, hostLink } from '../lib/links';
@@ -80,18 +81,21 @@ export function CreateRoundPage() {
 
     return (
       <main className="page">
-        <div className="brand">
-          <span className="brand-dot" aria-hidden="true" />
-          Wichteln
-        </div>
+        <header className="stack hero">
+          <Snow />
+          <div className="brand">
+            <span className="brand-dot" aria-hidden="true" />
+            Wichteln
+          </div>
 
-        <div>
-          <h1>Runde steht</h1>
-          <p className="muted">
-            {names.length} Namen, alle Zuteilungen sind bereits gezogen. Der Link
-            verteilt nur noch.
-          </p>
-        </div>
+          <div>
+            <h1>Runde steht</h1>
+            <p className="muted">
+              {names.length} Namen, alle Zuteilungen sind bereits gezogen. Der
+              Link verteilt nur noch.
+            </p>
+          </div>
+        </header>
 
         {demo && (
           <div className="warn">
@@ -165,18 +169,21 @@ export function CreateRoundPage() {
 
   return (
     <main className="page">
-      <div className="brand">
-        <span className="brand-dot" aria-hidden="true" />
-        Wichteln
-      </div>
+      <header className="stack hero">
+        <Snow />
+        <div className="brand">
+          <span className="brand-dot" aria-hidden="true" />
+          Wichteln
+        </div>
 
-      <div>
-        <h1>Wichteln auslosen</h1>
-        <p className="muted">
-          Ein Link für alle. Jeder tippt seinen Namen an und sieht, wen er
-          beschenkt.
-        </p>
-      </div>
+        <div>
+          <h1>Wichteln auslosen</h1>
+          <p className="muted">
+            Ein Link für alle. Jeder tippt seinen Namen an und sieht, wen er
+            beschenkt.
+          </p>
+        </div>
+      </header>
 
       {demo && <DemoNote />}
 

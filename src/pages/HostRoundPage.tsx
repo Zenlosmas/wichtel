@@ -2,7 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { CopyButton } from '../components/CopyButton';
 import { DemoNote } from '../components/DemoNote';
+import { Snow } from '../components/Snow';
 import { formatDate } from '../lib/format';
+import { appBase, guestLink } from '../lib/links';
 import { useStore } from '../lib/storeContext';
 import type { RoundState } from '../lib/types';
 
@@ -99,7 +101,11 @@ export function HostRoundPage() {
   const total = state.participants.length;
   const missing = state.participants.filter((p) => !p.revealed).map((p) => p.name);
   const drawn = total - missing.length;
-  const guestUrl = `${window.location.origin}/w/${state.id}`;
+  // Musste denselben Weg gehen wie die Links beim Anlegen: Unterpfad plus Hash.
+  const guestUrl = guestLink(
+    appBase(window.location.origin, import.meta.env.BASE_URL),
+    state.id,
+  );
 
   const reminder =
     missing.length === 0
@@ -110,7 +116,8 @@ export function HostRoundPage() {
 
   return (
     <main className="page">
-      <header className="stack">
+      <header className="stack hero">
+        <Snow />
         <div className="brand">
           <span className="brand-dot" aria-hidden="true" />
           Host-Ansicht

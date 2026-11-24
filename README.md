@@ -1,7 +1,7 @@
 # Wichteln
 
-**Live:** https://zenlosmas.github.io/wichtel/
-**Backend:** Supabase `ididedhgyvjlazzdnskk` (eu-central-1), Repo: https://github.com/Zenlosmas/wichtel
+**Live:** https://zenlosmas.github.io/wichteln/
+**Backend:** Supabase `ididedhgyvjlazzdnskk` (eu-central-1), Repo: https://github.com/Zenlosmas/wichteln
 
 Ein Link für die ganze Familie. Jeder öffnet ihn, tippt auf seinen Namen und
 sieht, wen er beschenkt. Sobald ein Name gezogen ist, ist er aus dem Topf.
@@ -62,9 +62,9 @@ den Server ausschließlich über `wichtel_draw`, und nur an das Gerät, das zieh
 Gehostet wird auf **GitHub Pages** (kein Vercel-Konto nötig):
 
 ```bash
-npm run build:pages          # baut mit BASE_PATH=/wichtel/ + 404.html
+npm run build:pages          # baut mit BASE_PATH=/wichteln/ + 404.html
 cd dist && git add -A && git commit -m "Deploy" \
-  && git push https://github.com/Zenlosmas/wichtel.git HEAD:gh-pages
+  && git push https://github.com/Zenlosmas/wichteln.git HEAD:gh-pages
 ```
 
 `dist/` ist ein eigenes Git-Repo (gitignored), das nur den Build enthält.
@@ -73,13 +73,13 @@ Direktaufruf funktionieren.
 
 **Warum Hash-Routing:** GitHub Pages beantwortet jeden Pfad ohne eigene Datei
 mit HTTP 404 — bei normalem Routing wäre jeder Runden-Link ein 404. Deshalb
-liegt die Route hinter dem `#`: `…/wichtel/#/w/abc`. Jeder Aufruf antwortet mit
+liegt die Route hinter dem `#`: `…/wichteln/#/w/abc`. Jeder Aufruf antwortet mit
 200, GitHubs 404-Seite kann nicht mehr erscheinen. Die Links baut
 `src/lib/links.ts` aus `import.meta.env.BASE_URL` — wer dort den Unterpfad
 vergisst, landet auf GitHubs 404.
 
 **Achtung beim Weitergeben:** immer den **kompletten** Link kopieren
-(`https://zenlosmas.github.io/wichtel/#/w/…`). Die reine Domain
+(`https://zenlosmas.github.io/wichteln/#/w/…`). Die reine Domain
 `zenlosmas.github.io` zeigt GitHubs „Site not found", und `/Wichtel/` mit
 großem W ist ein anderer Pfad.
 

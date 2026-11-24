@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { CopyButton } from '../components/CopyButton';
 import { DemoNote } from '../components/DemoNote';
+import { Snow } from '../components/Snow';
 import {
   clearReveal,
   getDeviceSecret,
@@ -202,7 +203,8 @@ export function GuestRoundPage() {
 
   return (
     <main className="page">
-      <header className="stack">
+      <header className="stack hero">
+        <Snow />
         <div className="brand">
           <span className="brand-dot" aria-hidden="true" />
           Wichteln
