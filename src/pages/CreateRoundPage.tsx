@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { CopyButton } from '../components/CopyButton';
 import { DemoNote } from '../components/DemoNote';
 import { Snow } from '../components/Snow';
+import { TreeLine } from '../components/TreeLine';
 import { MIN_NAMES, parseNames, validateNames } from '../lib/assignment';
 import { formatDate } from '../lib/format';
 import { appBase, guestLink, hostLink } from '../lib/links';
@@ -163,6 +164,8 @@ export function CreateRoundPage() {
         </button>
 
         {demo && <DemoNote />}
+
+        <TreeLine />
       </main>
     );
   }
@@ -263,6 +266,8 @@ export function CreateRoundPage() {
           {busy ? 'Wird angelegt …' : 'Runde anlegen'}
         </button>
       </form>
+
+      <TreeLine />
     </main>
   );
 }

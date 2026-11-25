@@ -86,13 +86,31 @@ großem W ist ein anderer Pfad.
 ## Tests
 
 ```bash
-npm test                      # 28 Unit-Tests, ohne Netz
+npm test                      # 32 Unit-Tests, ohne Netz
 ./scripts/smoke-backend.sh    # 13 Checks gegen das echte Supabase
+./scripts/smoke-security.sh   # 20 feindliche Checks gegen das echte Supabase
 ```
 
-28 Unit-Tests: Derangement (1000 Runden, nie ein Fixpunkt, jede Zuteilung genau
+32 Unit-Tests: Derangement (1000 Runden, nie ein Fixpunkt, jede Zuteilung genau
 einmal), Namensprüfung, Zug-Semantik (erster Zug, gleiches Gerät, fremdes Gerät,
 Reset), und dass der Zustand die Zuteilung nie enthält.
+
+`smoke-security.sh` fragt nicht „funktioniert es?", sondern „kommt jemand
+durch, der es nicht soll?" — Tabellen direkt lesen, `wichtel_new_id` aufrufen,
+Host-Ansicht über die Runden-ID öffnen, Token raten, Reset ohne Token, zu
+kurzes Gerätegeheimnis, unbekannter Name, Doppelklick, zwei Geräte im
+Wettlauf, fremdes Gerät. Legt dabei eine Testrunde an (landet in der DB).
+
+## Deko und Musik
+
+- Tannen am Seitenende: reine CSS-Formen (`clip-path`), keine Bilder, keine
+  Emojis. Auf schmalen Handys auf 68 % skaliert, damit nichts waagerecht
+  überläuft.
+- Musik: „Stille Nacht" (Gruber, 1818, gemeinfrei) als Spieluhr über die
+  Web-Audio-API — keine Audiodatei, kein Download, keine Lizenz. Browser
+  starten Ton erst nach einer Interaktion: beim Reload mit bestehender
+  Interaktion läuft es sofort, sonst startet der erste Tipp irgendwo auf der
+  Seite. Der `♪`-Knopf schaltet dauerhaft aus (`localStorage`).
 
 ## Annahmen
 

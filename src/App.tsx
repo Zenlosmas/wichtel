@@ -1,4 +1,5 @@
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { Music } from './components/Music';
 import { StoreProvider } from './components/StoreProvider';
 import { CreateRoundPage } from './pages/CreateRoundPage';
 import { GuestRoundPage } from './pages/GuestRoundPage';
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/h/:hostToken" element={<HostRoundPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+        <Music />
       </HashRouter>
     </StoreProvider>
   );

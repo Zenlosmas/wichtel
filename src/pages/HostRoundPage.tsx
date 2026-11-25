@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { CopyButton } from '../components/CopyButton';
 import { DemoNote } from '../components/DemoNote';
 import { Snow } from '../components/Snow';
+import { TreeLine } from '../components/TreeLine';
 import { formatDate } from '../lib/format';
 import { appBase, guestLink } from '../lib/links';
 import { useStore } from '../lib/storeContext';
@@ -214,6 +215,8 @@ export function HostRoundPage() {
       <Link className="btn btn-ghost btn-block" to="/">
         Neue Runde anlegen
       </Link>
+
+      <TreeLine />
     </main>
   );
 }

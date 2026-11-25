@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { CopyButton } from '../components/CopyButton';
 import { DemoNote } from '../components/DemoNote';
 import { Snow } from '../components/Snow';
+import { TreeLine } from '../components/TreeLine';
 import {
   clearReveal,
   getDeviceSecret,
@@ -359,6 +360,8 @@ export function GuestRoundPage() {
           )}
         </>
       )}
+
+      <TreeLine />
     </main>
   );
 }
